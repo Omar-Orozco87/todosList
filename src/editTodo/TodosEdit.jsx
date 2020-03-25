@@ -45,6 +45,14 @@ class TodosEdit extends Component {
     });
   };
 
+  displayModal = () => {
+    //Force state refresh in oder to re-render with posible new subtodos
+    const todoCpy = this.state.todo;
+    this.setState({
+      todo: todoCpy
+    });
+  };
+
   render() {
     const { todo } = this.props;
     const hasSubs =
@@ -54,7 +62,11 @@ class TodosEdit extends Component {
       todo.subtodos.length > 0;
     return (
       <div id={"editTodo" + todo.id} className="d-flex justify-content-start">
-        <button data-target={"#editTodoModal" + todo.id} data-toggle="modal">
+        <button
+          data-target={"#editTodoModal" + todo.id}
+          data-toggle="modal"
+          onClick={this.displayModal}
+        >
           <div className="d-inline-flex align-items-center">
             <span className="material-icons">edit</span>
           </div>

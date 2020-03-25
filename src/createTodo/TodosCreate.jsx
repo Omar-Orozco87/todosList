@@ -10,7 +10,6 @@ class TodosCreate extends Component {
       name: "",
       description: ""
     };
-    this.handleSaveChanges = this.handleSaveChanges.bind(this);
   }
 
   getLastId = (parentId = 0) => {
@@ -71,6 +70,13 @@ class TodosCreate extends Component {
     });
   };
 
+  displayModal = () => {
+    this.setState({
+      name: "",
+      description: ""
+    });
+  };
+
   render() {
     const { parentId } = this.props;
     return (
@@ -78,7 +84,11 @@ class TodosCreate extends Component {
         id={"createTodo" + parentId}
         className="d-flex justify-content-start"
       >
-        <button data-target={"#addTodoModal" + parentId} data-toggle="modal">
+        <button
+          data-target={"#addTodoModal" + parentId}
+          data-toggle="modal"
+          onClick={this.displayModal}
+        >
           <div className="d-inline-flex align-items-center">
             <div className="material-icons">add_box</div>
             New todo
@@ -117,6 +127,7 @@ class TodosCreate extends Component {
                       className="form-control"
                       id="todoName"
                       onChange={this.nameChanged}
+                      value={this.state.name}
                     ></input>
                     <label htmlFor="todoDescription">Todo description:</label>
                     <input
@@ -124,6 +135,7 @@ class TodosCreate extends Component {
                       className="form-control"
                       id="todoDescription"
                       onChange={this.descriptionChanged}
+                      value={this.state.description}
                     ></input>
                   </div>
                 </form>
